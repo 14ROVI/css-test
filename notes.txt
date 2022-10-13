@@ -1,0 +1,1 @@
+clicking a ghost makes it flash then die (replaces it some seconds later)

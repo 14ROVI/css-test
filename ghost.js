@@ -1,7 +1,8 @@
 const NUM_GHOST = 4;
 let pac = null;
-let gridRowCount = 0;
-let gridColumnCount = 0;
+let cWidth = 0;
+let cHeight = 0;
+const ms = 5;
 let UP = 0;
 let DOWN = 1;
 let LEFT = 2;
@@ -13,18 +14,11 @@ function elementsOverlap(el1, el2) {
     const domRect2 = el2.getBoundingClientRect();
   
     return !(
-      domRect1.top > domRect2.bottom ||
-      domRect1.right < domRect2.left ||
-      domRect1.bottom < domRect2.top ||
-      domRect1.left > domRect2.right
+        domRect1.top > domRect2.bottom ||
+        domRect1.right < domRect2.left ||
+        domRect1.bottom < domRect2.top ||
+        domRect1.left > domRect2.right
     );
-  }
-
-function getRowsColumns(pacman) {
-    const gridComputedStyle = window.getComputedStyle(pacman);
-    const gridRowCount = gridComputedStyle.getPropertyValue("grid-template-rows").split(" ").length;
-    const gridColumnCount = gridComputedStyle.getPropertyValue("grid-template-columns").split(" ").length;
-    return [gridRowCount, gridColumnCount];
 }
 
 function mousePacman(container) {
@@ -33,8 +27,8 @@ function mousePacman(container) {
     pac.classList.add("ghost");
     container.appendChild(pac);
 
-    let x = Math.round(Math.random() * gridColumnCount);
-    let y = Math.round(Math.random() * gridRowCount);
+    let x = Math.random() * cWidth;
+    let y = Math.random() * cHeight;
 
     let w = pac.width;
 
@@ -63,32 +57,32 @@ function mousePacman(container) {
         }
         
         if (direction == UP) {
-            y -= 1; // up
+            y -= ms; // up
             pac.style.transform = "rotate(270deg)";
         }
         else if (direction == DOWN) {
-            y += 1; // down
+            y += ms; // down
             pac.style.transform = "rotate(90deg)";
         }
         else if (direction == RIGHT) {
-            x += 1; // right
+            x += ms; // right
             pac.style.transform = "rotate(0deg)";
         }
         else if (direction == LEFT) {
-            x -= 1; // left
+            x -= ms; // left
             pac.style.transform = "rotate(180deg)";
         }
 
-        if (y > gridRowCount) {
-            y = gridRowCount;
+        if (y > cHeight) {
+            y = cHeight;
             direction = UP;
         }
         if (y < 0) {
             y = 0;
             direction = DOWN;
         }
-        if (x > gridColumnCount) {
-            x = gridColumnCount;
+        if (x > cWidth) {
+            x = cWidth;
             direction = LEFT;
         }
         if (x < 0) {
@@ -96,8 +90,8 @@ function mousePacman(container) {
             direction = RIGHT;
         }
 
-        pac.style.gridColumn = x;
-        pac.style.gridRow = y;
+        pac.style.left = x + "px";
+        pac.style.top = y + "px";
     }, 50);
 }
 
@@ -126,8 +120,8 @@ function ghost(pacman) {
     ghost.classList.add("ghost");
     pacman.appendChild(ghost);
 
-    let x = Math.round(Math.random() * gridColumnCount);
-    let y = Math.round(Math.random() * gridRowCount);
+    let x = Math.random() * cWidth;
+    let y = Math.random() * cHeight;
 
     let direction = Math.round(Math.random() * 4);
     
@@ -136,21 +130,21 @@ function ghost(pacman) {
             direction = Math.round(Math.random() * 4);
         }
         
-        if (direction == UP) y -= 1; // up
-        else if (direction == DOWN) y += 1; // down
-        else if (direction == RIGHT) x += 1; // right
-        else if (direction == LEFT) x -= 1; // left
+        if (direction == UP) y -= ms; // up
+        else if (direction == DOWN) y += ms; // down
+        else if (direction == RIGHT) x += ms; // right
+        else if (direction == LEFT) x -= ms; // left
 
-        if (y > gridRowCount) {
-            y = gridRowCount;
+        if (y > cHeight) {
+            y = cHeight;
             direction = UP;
         }
         if (y < 0) {
             y = 0;
             direction = DOWN;
         }
-        if (x > gridColumnCount) {
-            x = gridColumnCount;
+        if (x > cWidth) {
+            x = cWidth;
             direction = LEFT;
         }
         if (x < 0) {
@@ -158,23 +152,24 @@ function ghost(pacman) {
             direction = RIGHT;
         }
 
-        ghost.style.gridColumn = x;
-        ghost.style.gridRow = y;
+        ghost.style.left = x + "px";
+        ghost.style.top = y + "px";
 
         if (elementsOverlap(ghost, pac) && direction != STOP) {
             ghostDie(ghost, pacman);
             direction = STOP;
         }
-    }, 50);
+    }, 100);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const pacman = document.getElementById("pacman");
 
-    [gridRowCount, gridColumnCount] = getRowsColumns(pacman);
-    console.log([gridRowCount, gridColumnCount]);
+    cWidth = pacman.getBoundingClientRect().width;
+    cHeight = pacman.getBoundingClientRect().height;
     window.addEventListener("resize", () => {
-        [gridRowCount, gridColumnCount] = getRowsColumns(pacman);
+        cWidth = pacman.getBoundingClientRect().width;
+        cHeight = pacman.getBoundingClientRect().height;
     });
 
     mousePacman(pacman);

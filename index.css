@@ -8,10 +8,10 @@
     /* --background-colour: #ab2346; */
     /* --background-colour: #7a4483; */
 
-    /* --button-colour: #ffd43b;
-    --button-hover-background: #fab005; */
-    --button-colour: #00b295;
-    --button-hover-background: #00a085;
+    --button-colour: #ffd43b;
+    --button-hover-background: #fab005;
+    /* --button-colour: #00b295; */
+    /* --button-hover-background: #00a085; */
 }
 html, body {
     background-color: #F5F5F5;
@@ -68,6 +68,7 @@ nav {
 .nav-elements > *:hover .underline {
     display: block;
     border: solid 3px var(--nav-text-colour);
+    background-color: var(--nav-text-colour);
     border-radius: 10px;
     position: absolute;
     bottom: -15px;
@@ -126,24 +127,25 @@ h1 {
 }
 .pacman {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 30px;
-    bottom: 30px;
+    top: 0px;
+    left: 0px;
+    right: 40px;
+    bottom: 40px;
     z-index: 0;
     user-select: none;
-    
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(5px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(5px, 1fr));
 }
 .ghost {
-    /* position: absolute; */
+    transition: linear 100ms;
+    position: absolute;
     width: 40px;
-    margin: auto;
     filter: opacity(0.15);
     z-index: 0;
     user-select: none;
+}
+@media only screen and (max-width: 600px) {
+    .pacman {
+        opacity: 0;
+    }
 }
 
 
@@ -187,7 +189,7 @@ h2 {
     width: 100%;
     border-radius: 5px;
     border: var(--text-colour) 1px solid;
-    box-shadow: var(--text-colour) 0px 3px 0px 0px;
+    box-shadow: var(--text-colour) 3px 3px 0px 0px;
     cursor: pointer;
     transition: 50ms;
     text-align: center;
@@ -200,7 +202,7 @@ h2 {
 }
 .join-button:active {
     box-shadow: none;
-    transform: translateY(3px);
+    transform: translate(3px, 3px);
 }
 
 .events {
