@@ -15,11 +15,13 @@
     </head>
     <body>
         <div id="top" class="top">
+            <a class="skip-main" href="#main">Skip to main content</a>
+
             <img alt="University of Bristol logo crest" class="inset-image" src="university-of-bristol.svg"/>
             <div id="pacman" class="pacman"></div>
 
             <nav>
-                <a title="home" id="nav-logo" href="index.html">
+                <a title="home" id="nav-logo" href="index.html" aria-current="page">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="100%" height="100%">
                         <path transform="translate(85.718 -341.4)" d="m9.33 412.62a50 50 0 0 1-56.137 27.684 50 50 0 0 1-39.178-48.815 50 50 0 0 1 39.178-48.815 50 50 0 0 1 56.137 27.684l-45.315 21.131z"/>
                         <circle cx="105" cy="50" r="10"/>
@@ -57,19 +59,22 @@
             </header>
         </div>
 
-        <div class="main-content">
-            <h2>About</h2>
-            <div class="right-image-section">
-                <div>
-                    <p>We are the main university-wide student society for those taking interest in computer science and technology. Our primary events are a series of talks held by invited speakers on a relevant area and technical events where you can show off your coding skills.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aliquam, eligendi consequatur deserunt obcaecati perspiciatis. Dolorem iusto numquam quod facere, blanditiis assumenda porro, modi placeat rem ipsum doloribus ex in.</p>
-                    <a class="join-button">Join us today!</a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aliquam, eligendi consequatur deserunt obcaecati perspiciatis. Dolorem iusto numquam quod facere, blanditiis assumenda porro, modi placeat rem ipsum doloribus ex in.</p>
-                    
+        <main id="main" tabindex="-1">
+            
+            <section>
+                <h2>About</h2>
+                <div class="right-image-section">
+                    <div>
+                        <p>We are the main university-wide student society for those taking interest in computer science and technology. Our primary events are a series of talks held by invited speakers on a relevant area and technical events where you can show off your coding skills.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aliquam, eligendi consequatur deserunt obcaecati perspiciatis. Dolorem iusto numquam quod facere, blanditiis assumenda porro, modi placeat rem ipsum doloribus ex in.</p>
+                        <a tabindex="0" class="join-button">Join us today!</a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aliquam, eligendi consequatur deserunt obcaecati perspiciatis. Dolorem iusto numquam quod facere, blanditiis assumenda porro, modi placeat rem ipsum doloribus ex in.</p>
+                        
+                    </div>
+                    <img src="splash.jpg"/>
                 </div>
-                <img src="splash.jpg"/>
-            </div>
+            </section>
 
-        </div>
+        </main>
     </body>
 </html>
