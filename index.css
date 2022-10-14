@@ -77,6 +77,80 @@ nav {
 }
 
 
+/* MOBILE MENU */
+.nav-open-button {
+    display: none;
+}
+
+@media only screen and (max-width: 800px) {
+    .nav-elements {
+        display: none;
+    }
+    .nav-open-button > #burger-close-svg {
+        display: none;
+    }
+    .nav-open-button > svg {
+        height: 25px;
+        width: auto;
+        vertical-align: middle;
+        fill: var(--nav-text-colour);
+        cursor: pointer;
+    }
+    .nav-open-button {
+        display: block;
+        margin-left: auto;
+        padding: 10px;
+        border-radius: 17px;
+        background-color: var(--text-colour);
+        transition: 100ms;
+        z-index: 10;
+        cursor: pointer;
+        user-select: none;
+    }
+    .nav-open-button:has(*:focus-visible) {
+        outline: -webkit-focus-ring-color auto 5px;
+    }
+    .nav-open-button input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .nav-open-button:has(*:checked) > #burger-open-svg {
+        display: none;
+    }
+    .nav-open-button:has(*:checked) > #burger-close-svg {
+        display: block;
+    }
+
+    .nav-open-button:has(*:checked) {
+        z-index: 11;
+    }
+    .nav-open-button:has(*:checked) ~ .nav-elements {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        right: 0px;
+        top: 0px;
+        padding: 80px 10px 10px 10px;
+        gap: 10px;
+        width: 400px;
+        max-width: 100%;
+        bottom: 0px;
+        background-color: var(--text-colour);
+        box-shadow: rgb(0 0 0 / 20%) 0px 0px 0px 1000px;
+        z-index: 10;
+    }
+    .nav-open-button:has(*:checked) ~ .nav-elements > *:hover .underline {
+        display: none;
+    }
+    .nav-elements > *:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+}
+
+
+
 .top {
     background-color: var(--background-colour);
     position: relative;
